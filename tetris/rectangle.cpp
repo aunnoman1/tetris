@@ -10,3 +10,7 @@ void rectangle::setTopLeft()
 {
 	topLeft += 50;
 }
+void rectangle::draw()
+{
+
+}

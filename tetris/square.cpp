@@ -11,7 +11,7 @@ void square::setTopLeft()
 {
 	topLeft += 50;
 }
-void draw()
+void square::draw()
 {
 
 }

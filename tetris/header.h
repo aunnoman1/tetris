@@ -9,6 +9,7 @@ protected:
 public:
 	virtual void rotatesHape() = 0;
 	virtual void setTopLeft() = 0;
+	virtual void draw() = 0;
 };
 
 class square : public tetrimino

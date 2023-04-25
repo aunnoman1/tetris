@@ -5,7 +5,7 @@ int main()
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     cout << desktop.height << desktop.width;
     sf::RenderWindow window(desktop, "TETRIS");
-    int well[20][10] = { 0 };
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -16,6 +16,7 @@ int main()
         }
 
         window.clear();
+        sf::RectangleShape lWell(sf::Vector2f(150.f, 2.f));
         window.display();
     }
 
