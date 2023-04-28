@@ -13,8 +13,9 @@ protected:
 	int col;
 public:
 	virtual void rotateShape() = 0;
-	virtual bool drop(int well[][10]) = 0;
-	virtual void draw(sf::RectangleShape,sf::RenderWindow) = 0;
+	virtual bool drop(int well[][10], sf::RectangleShape&, sf::RenderWindow &) = 0;
+	virtual void draw(sf::RectangleShape&,sf::RenderWindow&) = 0;
+	virtual void resetLocation() = 0;
 	sf::Color getColour()
 	{
 		return sf::Color(colour[0], colour[1], colour[2], colour[3]);
@@ -30,8 +31,9 @@ class square : public tetrimino
 public:
 	square();
 	void rotateShape();
-	bool drop(int well[][10]);
-	void draw(sf::RectangleShape,sf::RenderWindow);
+	bool drop(int well[][10], sf::RectangleShape& , sf::RenderWindow&);
+	void draw(sf::RectangleShape&,sf::RenderWindow&);
+	void resetLocation() ;
 };
 
 class rectangle : public tetrimino
@@ -39,6 +41,7 @@ class rectangle : public tetrimino
 public:
 	rectangle();
 	void rotateShape();
-	bool drop(int well[][10]);
+	bool drop(int well[][10], sf::RectangleShape& , sf::RenderWindow &);
 	void draw();
+	void resetLocation();
 };

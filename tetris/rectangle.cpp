@@ -4,16 +4,19 @@ rectangle::rectangle()
 {
 
 	rotation = 0;
-	topLeft = 0;
+	MainX = 0;
 }
 
-bool rectangle::drop(int well[][10])
+bool rectangle::drop(int well[][10], sf::RectangleShape &shapedrawer, sf::RenderWindow &window)
 {
-	topLeft += 50;
+	MainX += 50;
+	return true;
 }
 void rectangle::draw()
 {
 
 }
 void rectangle::rotateShape()
+{}
+void rectangle::resetLocation()
 {}

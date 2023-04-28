@@ -13,18 +13,18 @@ square::square()
 	col = 0;
 	rotation = 0;
 	MainX = 500 + row * 40;
-	MainY = 100 + col * 40;;
+	MainY = 100 + col * 40;
 	
 }
 void square::rotateShape()
 {}
-bool square::drop(int well[][10])
+bool square::drop(int well[][10], sf::RectangleShape &shapedrawer, sf::RenderWindow &window)
 {
 	if (well[row + 2][col] == 0 && well[row + 2][col + 1] == 0)
 	{
 		MainY += 50;
 		row++;
-		draw();
+		draw(shapedrawer, window);
 	}
 	if (well[row + 2][col] == 0 && well[row + 2][col + 1] == 0)
 	{
@@ -33,7 +33,7 @@ bool square::drop(int well[][10])
 	return false;
 
 }
-void square::draw(sf::RectangleShape shapedrawer,sf::RenderWindow window)
+void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window)
 {
 	shapedrawer.setFillColor(sf::Color(colour[0], colour[1], colour[2], colour[3]));
 	shapedrawer.setOutlineColor(sf::Color(outerColour[0], outerColour[1], outerColour[2], outerColour[3]));
@@ -46,4 +46,12 @@ void square::draw(sf::RectangleShape shapedrawer,sf::RenderWindow window)
 	window.draw(shapedrawer);
 	shapedrawer.setPosition(MainX + 40, MainY+04);
 	window.draw(shapedrawer);
+}
+void square::resetLocation()
+{
+	row = 4;
+	col = 0;
+	rotation = 0;
+	MainX = 500 + row * 40;
+	MainY = 100 + col * 40;
 }
