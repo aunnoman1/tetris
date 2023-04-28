@@ -36,11 +36,11 @@ int main()
 
         window.clear();
         shapes[currentShape]->draw(shapemaker, window);
-        if (elapsed >= interval)
-        {
-            settled = shapes[currentShape]->drop(well, shapemaker, window);
-            clock.restart();
-        }
+        //if (elapsed >= interval)
+        //{
+        //    settled = shapes[currentShape]->drop(well, shapemaker, window);
+        //    clock.restart();
+        //}
         wellBoundary.setFillColor(sf::Color(12, 12, 12));
         wellBoundary.setOutlineThickness(2);
         wellBoundary.setOutlineColor(sf::Color(255, 255, 255));

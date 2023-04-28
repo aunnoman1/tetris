@@ -44,7 +44,7 @@ void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window)
 	window.draw(shapedrawer);
 	shapedrawer.setPosition(MainX, MainY+40);
 	window.draw(shapedrawer);
-	shapedrawer.setPosition(MainX + 40, MainY+04);
+	shapedrawer.setPosition(MainX + 40, MainY+40);
 	window.draw(shapedrawer);
 }
 void square::resetLocation()
