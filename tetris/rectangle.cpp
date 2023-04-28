@@ -2,11 +2,12 @@
 
 rectangle::rectangle()
 {
-	colour = 2;
+
 	rotation = 0;
 	topLeft = 0;
 }
-void rectangle::setTopLeft()
+
+bool rectangle::drop(int well[][10])
 {
 	topLeft += 50;
 }
@@ -14,3 +15,5 @@ void rectangle::draw()
 {
 
 }
+void rectangle::rotateShape()
+{}

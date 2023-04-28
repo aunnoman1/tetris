@@ -3,11 +3,23 @@
 int main()
 {
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    cout << desktop.height << desktop.width;
     sf::RenderWindow window(desktop, "TETRIS");
+    int well[20][10] = { 0 };
+    well[19][ 9] = 1;
+    tetrimino** shapes=new tetrimino*[7];
+    shapes[0] = new square;
+    shapes[1] = new square;
+    shapes[2] = new square;
+    shapes[3] = new square;
+    shapes[4] = new square;
+    shapes[5] = new square;
+    shapes[6] = new square;
+    sf::Time interval = sf::milliseconds(1000);
 
     while (window.isOpen())
     {
+        sf::Clock clock;
+        if(clock>=interval)
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -16,7 +28,38 @@ int main()
         }
 
         window.clear();
-        sf::RectangleShape lWell(sf::Vector2f(150.f, 2.f));
+        sf::RectangleShape wellBoundary(sf::Vector2f(400.f, 800.f));
+        sf::RectangleShape wellfiller(sf::Vector2f(40.f, 40.f));
+        sf::RectangleShape shapemaker(sf::Vector2f(40.f, 40.f));
+        wellBoundary.setFillColor(sf::Color(12, 12, 12));
+        wellBoundary.setOutlineThickness(2);
+        wellBoundary.setOutlineColor(sf::Color(255, 255, 255));
+        wellBoundary.setPosition(sf::Vector2f(500.f, 100.f));
+        wellfiller.setFillColor(sf::Color(12, 12, 12));
+        window.draw(wellBoundary);
+        for (int i = 0; i < 20; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if (well[i][j] == 0)
+                {
+                    wellfiller.setFillColor(sf::Color(12, 12, 12));
+                    wellfiller.setOutlineThickness(-1);
+                    wellfiller.setOutlineColor(sf::Color(46, 46, 46));
+                    wellfiller.setPosition(sf::Vector2f((500 + 40 * j), (100 + 40 * i)));
+                    window.draw(wellfiller);
+                }
+                else
+                {
+                    wellfiller.setFillColor((shapes[well[i][j] - 1])->getColour());
+                    wellfiller.setOutlineThickness(-3);
+                    wellfiller.setOutlineColor((shapes[well[i][j] - 1])->getOuterColour());
+                    wellfiller.setPosition(sf::Vector2f((500 + 40 * j), (100 + 40 * i)));
+                    window.draw(wellfiller);
+                }
+
+            }
+        }
         window.display();
     }
 
