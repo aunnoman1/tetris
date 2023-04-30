@@ -16,11 +16,13 @@ protected:
 	int mainCol;
 public:
 	virtual void rotateShape() = 0;
-	virtual void drop(Well, sf::RectangleShape&, sf::RenderWindow&) = 0;
+	virtual void drop(Well&, sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void draw(sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void resetLocation() = 0;
-	virtual void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well) = 0;
-	virtual bool isSettled(Well) = 0;
+	virtual void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well&) = 0;
+	virtual void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&) = 0;
+	virtual bool isSettled(Well&) = 0;
+	virtual void updateWell(Well&) = 0;
 	sf::Color getColour()
 	{
 		return sf::Color(colour[0], colour[1], colour[2], colour[3]);
@@ -41,6 +43,7 @@ public:
 	Well();
 	void drawWell(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, tetrimino**&);
 	bool cellCheck(int, int);
+	void setCell(int, int, int);
 };
 
 
@@ -57,7 +60,8 @@ public:
 	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape);
 	void dropShape(sf::RectangleShape&, sf::RenderWindow&);
 	void moveRight(sf::RectangleShape&, sf::RenderWindow&);
-	void fixShape()
+	void moveLeft(sf::RectangleShape&, sf::RenderWindow&);
+	void fixShape();
 };
 
 
@@ -68,11 +72,13 @@ class square : public tetrimino
 public:
 	square();
 	void rotateShape();
-	void drop(Well, sf::RectangleShape& , sf::RenderWindow&);
+	void drop(Well&, sf::RectangleShape& , sf::RenderWindow&);
 	void draw(sf::RectangleShape&,sf::RenderWindow&);
 	void resetLocation() ;
-	void moveRight(sf::RectangleShape&, sf::RenderWindow&,Well);
-	bool isSettled(Well);
+	void moveRight(sf::RectangleShape&, sf::RenderWindow&,Well&);
+	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
+	bool isSettled(Well&);
+	void updateWell(Well&);
 };
 
 class rectangle : public tetrimino

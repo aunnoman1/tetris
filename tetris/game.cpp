@@ -20,12 +20,34 @@ void Game::drawGame(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, 
 void Game::dropShape(sf::RectangleShape& shapemaker,sf::RenderWindow& window)
 {
 	shapes[currentShape]->drop(well, shapemaker, window);
+	if (shapes[currentShape]->isSettled(well))
+	{
+		fixShape();
+		shapes[currentShape]->resetLocation();
+		currentShape = rand() % 7;
+	}
 }
 void Game::moveRight(sf::RectangleShape& shapeMaker, sf::RenderWindow& window)
 {
 	 shapes[currentShape]->moveRight(shapeMaker, window ,well);
+	 if (shapes[currentShape]->isSettled(well))
+	 {
+		 fixShape();
+		 shapes[currentShape]->resetLocation();
+		 currentShape = rand() % 7;
+	 }
 }
-void fixShape()
+void Game::moveLeft(sf::RectangleShape& shapeMaker, sf::RenderWindow& window)
 {
-
+	shapes[currentShape]->moveLeft(shapeMaker, window, well);
+	if (shapes[currentShape]->isSettled(well))
+	{
+		fixShape();
+		shapes[currentShape]->resetLocation();
+		currentShape = rand() % 7;
+	}
+}
+void Game::fixShape()
+{
+	shapes[currentShape]->updateWell(well);
 }

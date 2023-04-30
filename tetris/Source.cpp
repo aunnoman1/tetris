@@ -29,6 +29,14 @@ int main()
                 {
                     game.moveRight(shapemaker, window);
                 }
+                if (event.key.code == sf::Keyboard::Down)
+                {
+                    game.dropShape(shapemaker, window);
+                }
+                if (event.key.code == sf::Keyboard::Left)
+                {
+                    game.moveLeft(shapemaker, window);
+                }
             }
         }
 

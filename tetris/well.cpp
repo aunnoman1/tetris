@@ -44,3 +44,7 @@ bool Well::cellCheck(int row, int col) // return true if cell empty
 		return true;
 	return false;
 }
+void Well::setCell(int val, int row, int col)
+{
+	grid[row][col] = val;
+}
