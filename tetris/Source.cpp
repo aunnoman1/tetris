@@ -27,7 +27,7 @@ int main()
             {
                 if (event.key.code == sf::Keyboard::Right)
                 {
-                    
+                    game.moveRight(shapemaker, window);
                 }
             }
         }
@@ -41,7 +41,7 @@ int main()
 
         if (elapsed >= interval)
         {
-            settled = game.dropShape(shapemaker,window);
+            game.dropShape(shapemaker,window);
             clock.restart();
         }
         window.display();

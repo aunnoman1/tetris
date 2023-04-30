@@ -18,20 +18,23 @@ square::square()
 }
 void square::rotateShape()
 {}
-bool square::drop(int well[][10], sf::RectangleShape &shapedrawer, sf::RenderWindow &window)
+bool square::isSettled(Well well)
 {
-	if (well[mainRow + 2][mainCol] == 0 && well[mainRow + 2][mainCol + 1] == 0)
+	if (well.cellCheck(mainRow + 2,mainCol) == true && well.cellCheck(mainRow + 2,mainCol + 1) == true)
+	{
+		return false;
+	}
+	return true;
+
+}
+void square::drop(Well well, sf::RectangleShape &shapedrawer, sf::RenderWindow &window) //false = shape is not settled, true= shape is settled
+{
+	if (mainRow<18&& well.cellCheck(mainRow + 2,mainCol) == true && well.cellCheck(mainRow + 2,mainCol + 1) == true)
 	{
 		mainY += 40;
 		mainRow++;
 		draw(shapedrawer, window);
 	}
-	if (well[mainRow + 2][mainCol] == 0 && well[mainRow + 2][mainCol + 1] == 0)
-	{
-		return true;
-	}
-	return false;
-
 }
 void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window)
 {
@@ -55,10 +58,12 @@ void square::resetLocation()
 	mainX = 500 + mainRow * 40;
 	mainY = 100 + mainCol * 40;
 }
-void square::move(sf::RectangleShape& shapedrawer, sf::RenderWindow& window, bool direction) //true = right, left=false
+void square::moveRight(sf::RectangleShape& shapedrawer, sf::RenderWindow& window, Well well)
 {
-	if (direction == true)
+	if (mainCol < 8 && well.cellCheck(mainRow, mainCol + 2) == true && well.cellCheck(mainRow + 1, mainCol + 2) == true)
 	{
-		
+		mainCol++;
+		mainX += 40;
+		draw(shapedrawer,window);
 	}
 }

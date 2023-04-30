@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
+class Well;
+
 class tetrimino
 {
 protected:
@@ -14,10 +16,11 @@ protected:
 	int mainCol;
 public:
 	virtual void rotateShape() = 0;
-	virtual bool drop(int well[][10], sf::RectangleShape&, sf::RenderWindow&) = 0;
+	virtual void drop(Well, sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void draw(sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void resetLocation() = 0;
-	virtual void move(sf::RectangleShape&, sf::RenderWindow&, bool) = 0;
+	virtual void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well) = 0;
+	virtual bool isSettled(Well) = 0;
 	sf::Color getColour()
 	{
 		return sf::Color(colour[0], colour[1], colour[2], colour[3]);
@@ -52,7 +55,9 @@ class Game
 public:
 	Game();
 	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape);
-	bool dropShape(sf::RectangleShape&, sf::RenderWindow&);
+	void dropShape(sf::RectangleShape&, sf::RenderWindow&);
+	void moveRight(sf::RectangleShape&, sf::RenderWindow&);
+	void fixShape()
 };
 
 
@@ -63,10 +68,11 @@ class square : public tetrimino
 public:
 	square();
 	void rotateShape();
-	bool drop(int well[][10], sf::RectangleShape& , sf::RenderWindow&);
+	void drop(Well, sf::RectangleShape& , sf::RenderWindow&);
 	void draw(sf::RectangleShape&,sf::RenderWindow&);
 	void resetLocation() ;
-	void move(sf::RectangleShape&, sf::RenderWindow&, bool);
+	void moveRight(sf::RectangleShape&, sf::RenderWindow&,Well);
+	bool isSettled(Well);
 };
 
 class rectangle : public tetrimino

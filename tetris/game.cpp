@@ -17,7 +17,15 @@ void Game::drawGame(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, 
 	shapes[currentShape]->draw(shapemaker, window);
 
 }
-bool Game::dropShape(sf::RectangleShape& shapemaker,sf::RenderWindow& window)
+void Game::dropShape(sf::RectangleShape& shapemaker,sf::RenderWindow& window)
 {
-	return shapes[currentShape]->drop(well.grid, shapemaker, window);
+	shapes[currentShape]->drop(well, shapemaker, window);
+}
+void Game::moveRight(sf::RectangleShape& shapeMaker, sf::RenderWindow& window)
+{
+	 shapes[currentShape]->moveRight(shapeMaker, window ,well);
+}
+void fixShape()
+{
+
 }

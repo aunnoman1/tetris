@@ -2,7 +2,9 @@
 
 Well::Well()
 {
-	int well[20][10] = { 0 };
+	for (int i = 0; i < 20; i++)
+		for (int j = 0; j < 10; j++)
+			grid[i][j] = 0;
 }
 
 void Well::drawWell(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, sf::RectangleShape& wellfiller, tetrimino**& shapes)
@@ -36,7 +38,7 @@ void Well::drawWell(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, 
 		}
 	}
 }
-bool Well::cellCheck(int row, int col)
+bool Well::cellCheck(int row, int col) // return true if cell empty
 {
 	if (grid[row][col] == 0)
 		return true;
