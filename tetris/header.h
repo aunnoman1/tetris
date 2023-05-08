@@ -62,6 +62,7 @@ public:
 	void moveRight(sf::RectangleShape&, sf::RenderWindow&);
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&);
 	void fixShape();
+	void checkCombo();
 };
 
 
@@ -85,8 +86,12 @@ class rectangle : public tetrimino
 {
 public:
 	rectangle();
-	void rotateShape();
-	bool drop(int well[][10], sf::RectangleShape& , sf::RenderWindow &);
-	void draw();
+	void rotateShape(Well&);
+	void drop(Well&, sf::RectangleShape&, sf::RenderWindow&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&);
 	void resetLocation();
+	void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well&);
+	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
+	bool isSettled(Well&);
+	void updateWell(Well&);
 };

@@ -5,7 +5,6 @@ int main()
 {
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "TETRIS");
-    bool settled = false;
     Game game;
     sf::Time interval = sf::milliseconds(1000);
     sf::Time elapsed;
@@ -45,7 +44,7 @@ int main()
 
 
 
-
+        game.fixShape();
 
         if (elapsed >= interval)
         {
