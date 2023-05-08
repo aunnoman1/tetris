@@ -8,7 +8,7 @@ rectangle::rectangle()
 	outerColour[0] = 0;
 	outerColour[1] = 204;
 	outerColour[2] = 204;
-	outerColour[3] = 1;
+	outerColour[3] = 255;
 	mainRow = 0;
 	mainCol = 4;
 	rotation = 0;
@@ -18,19 +18,22 @@ rectangle::rectangle()
 }
 void rectangle::rotateShape(Well& well)
 {
-	if (rotation = 1 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow, mainCol + 2) == true)
-		rotation = (rotation + 1) % 2;
-	if (rotation = 0 && well.cellCheck(mainRow - 1, mainCol) == true && well.cellCheck(mainRow + 1, mainCol) == true && well.cellCheck(mainRow + 2, mainCol) == true)
-		rotation = (rotation + 1) % 2;
-
+	if (rotation == 0 && well.cellCheck(mainRow - 1, mainCol) == true && well.cellCheck(mainRow + 1, mainCol) == true && well.cellCheck(mainRow + 2, mainCol) == true)
+	{
+		rotation = 1; cout << rotation;
+	}
+	else if (rotation == 1 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow, mainCol + 2) == true)
+	{
+		rotation = 0; cout << rotation;
+	}
 }
 bool rectangle::isSettled(Well& well) //returns false if every block under it is empty
 {
-	if (rotation==0 && well.cellCheck(mainRow + 1, mainCol-1) == true && well.cellCheck(mainRow + 1, mainCol ) == true && well.cellCheck(mainRow + 1, mainCol+1) == true && well.cellCheck(mainRow + 1, mainCol+2) == true)
+	if (rotation == 0 && mainRow < 19 && well.cellCheck(mainRow + 1, mainCol - 1) == true && well.cellCheck(mainRow + 1, mainCol) == true && well.cellCheck(mainRow + 1, mainCol + 1) == true && well.cellCheck(mainRow + 1, mainCol + 2) == true)
 	{
 		return false;
 	}
-	if (rotation == 1 && well.cellCheck(mainRow, mainCol + 3) == true)
+	if (rotation == 1 && mainRow<17 && well.cellCheck(mainRow+3, mainCol ) == true)
 	{
 		return false;
 	}
@@ -45,7 +48,7 @@ void rectangle::drop(Well& well, sf::RectangleShape& shapedrawer, sf::RenderWind
 		mainY = mainY + 40;
 		draw(shapedrawer, window);
 	}
-	if (rotation == 1 && well.cellCheck(mainRow, mainCol + 3) == true)
+	if (rotation == 1 &&mainRow<17 && well.cellCheck(mainRow+3, mainCol ) == true)
 	{
 		mainRow++;
 		mainY = mainY + 40;
@@ -105,7 +108,13 @@ void rectangle::moveRight(sf::RectangleShape& shapedrawer, sf::RenderWindow& win
 }
 void rectangle::moveLeft(sf::RectangleShape& shapedrawer, sf::RenderWindow& window, Well& well)
 {
-	if (mainCol > 0 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow + 1, mainCol - 1) == true)
+	if (rotation == 0 && mainCol >1  && well.cellCheck(mainRow, mainCol - 2) == true)
+	{
+		mainCol--;
+		mainX -= 40;
+		draw(shapedrawer, window);
+	}
+	if (rotation == 1 && mainCol >0  && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow - 1, mainCol - 1) == true && well.cellCheck(mainRow + 1, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol - 1) == true)
 	{
 		mainCol--;
 		mainX -= 40;
@@ -114,9 +123,18 @@ void rectangle::moveLeft(sf::RectangleShape& shapedrawer, sf::RenderWindow& wind
 }
 void rectangle::updateWell(Well& well)
 {
-	well.setCell(1, mainRow, mainCol);
-	well.setCell(1, mainRow, mainCol + 1);
-	well.setCell(1, mainRow + 1, mainCol);
-	well.setCell(1, mainRow + 1, mainCol + 1);
-
+	if (rotation == 0)
+	{
+		well.setCell(2, mainRow, mainCol);
+		well.setCell(2, mainRow, mainCol - 1);
+		well.setCell(2, mainRow , mainCol + 1);
+		well.setCell(2, mainRow , mainCol + 2);
+	}
+	if (rotation == 1)
+	{
+		well.setCell(2, mainRow, mainCol);
+		well.setCell(2, mainRow - 1, mainCol);
+		well.setCell(2, mainRow + 1, mainCol);
+		well.setCell(2, mainRow + 2, mainCol);
+	}
 }

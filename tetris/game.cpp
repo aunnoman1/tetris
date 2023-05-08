@@ -3,11 +3,11 @@ Game::Game()
 {
 	shapes = new tetrimino * [7];
 	shapes[0] = new square;
-	shapes[1] = new square;
+	shapes[1] = new rectangle;
 	shapes[2] = new square;
-	shapes[3] = new square;
+	shapes[3] = new rectangle;
 	shapes[4] = new square;
-	shapes[5] = new square;
+	shapes[5] = new rectangle;
 	shapes[6] = new square;
 	currentShape = rand() % 7;
 }
@@ -47,6 +47,10 @@ void Game::moveLeft(sf::RectangleShape& shapeMaker, sf::RenderWindow& window)
 	//	currentShape = rand() % 7;
 	//}
 }
+void Game::rotateShape(sf::RectangleShape& shapemaker, sf::RenderWindow& window)
+{
+	shapes[currentShape]->rotateShape(well);
+}
 void Game::fixShape()
 {
 	if (shapes[currentShape]->isSettled(well))
@@ -55,6 +59,16 @@ void Game::fixShape()
 		checkCombo();
 		shapes[currentShape]->resetLocation();
 		currentShape = rand() % 7;
+		system("CLS");
+		for (int i = 0; i < 20; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				cout << well.grid[i][j] << " ";
+			}
+			cout << endl;
+		}
+
 	}
 }
 void Game::checkCombo()

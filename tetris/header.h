@@ -15,7 +15,7 @@ protected:
 	int mainRow;
 	int mainCol;
 public:
-	virtual void rotateShape() = 0;
+	virtual void rotateShape(Well&) = 0;
 	virtual void drop(Well&, sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void draw(sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void resetLocation() = 0;
@@ -36,8 +36,8 @@ public:
 
 class Well
 {
-
 	int grid[20][10];
+
 public:
 	friend class Game;
 	Well();
@@ -63,6 +63,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&);
 	void fixShape();
 	void checkCombo();
+	void rotateShape(sf::RectangleShape&, sf::RenderWindow&);
 };
 
 
@@ -72,7 +73,7 @@ class square : public tetrimino
 {
 public:
 	square();
-	void rotateShape();
+	void rotateShape(Well&);
 	void drop(Well&, sf::RectangleShape& , sf::RenderWindow&);
 	void draw(sf::RectangleShape&,sf::RenderWindow&);
 	void resetLocation() ;

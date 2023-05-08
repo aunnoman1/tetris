@@ -16,7 +16,7 @@ square::square()
 	mainY = 100 + mainRow * 40;
 	
 }
-void square::rotateShape()
+void square::rotateShape(Well&)
 {}
 bool square::isSettled(Well& well)
 {

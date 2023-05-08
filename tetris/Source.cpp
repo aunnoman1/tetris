@@ -3,6 +3,7 @@
 #include<random>
 int main()
 {
+    srand(0);
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "TETRIS");
     Game game;
@@ -36,6 +37,10 @@ int main()
                 {
                     game.moveLeft(shapemaker, window);
                 }
+                if (event.key.code == sf::Keyboard::Up)
+                {
+                    game.rotateShape(shapemaker, window);
+                }
             }
         }
 
@@ -52,6 +57,7 @@ int main()
             clock.restart();
         }
         window.display();
+
     }
 
     return 0;
