@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LReverse.cpp" />
     <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="game.cpp" />

@@ -96,3 +96,17 @@ public:
 	bool isSettled(Well&);
 	void updateWell(Well&);
 };
+
+class lReverse : public tetrimino
+{
+public:
+	lReverse();
+	void rotateShape(Well&);
+	void drop(Well&, sf::RectangleShape&, sf::RenderWindow&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&);
+	void resetLocation();
+	void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well&);
+	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
+	bool isSettled(Well&);
+	void updateWell(Well&);
+};

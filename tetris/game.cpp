@@ -4,10 +4,10 @@ Game::Game()
 	shapes = new tetrimino * [7];
 	shapes[0] = new square;
 	shapes[1] = new rectangle;
-	shapes[2] = new square;
-	shapes[3] = new rectangle;
-	shapes[4] = new square;
-	shapes[5] = new rectangle;
+	shapes[2] = new lReverse;
+	shapes[3] = new square;
+	shapes[4] = new rectangle;
+	shapes[5] = new lReverse;
 	shapes[6] = new square;
 	currentShape = rand() % 7;
 }
