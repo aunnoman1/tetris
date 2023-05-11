@@ -139,7 +139,9 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="square.cpp" />
+    <ClCompile Include="sReverse.cpp" />
     <ClCompile Include="sStraight.cpp" />
+    <ClCompile Include="T.cpp" />
     <ClCompile Include="well.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@
 #include<random>
 int main()
 {
-    srand(0);
+    srand(time(0));
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "TETRIS");
     Game game;

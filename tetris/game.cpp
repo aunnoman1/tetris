@@ -2,13 +2,13 @@
 Game::Game()
 {
 	shapes = new tetrimino * [7];
-	shapes[0] = new sStraight;
-	shapes[1] = new sStraight;
-	shapes[2] = new sStraight;
+	shapes[0] = new square;
+	shapes[1] = new rectangle;
+	shapes[2] = new lReverse;
 	shapes[3] = new lStraight;
-	shapes[4] = new lReverse;
-	shapes[5] = new lReverse;
-	shapes[6] = new lStraight;
+	shapes[4] = new sStraight;
+	shapes[5] = new sStraight;
+	shapes[6] = new T;
 	currentShape = rand() % 7;
 }
 void Game::drawGame(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, sf::RectangleShape& wellFiller,sf::RectangleShape shapemaker)

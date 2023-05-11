@@ -39,6 +39,12 @@
     <ClCompile Include="sStraight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sReverse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="T.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">

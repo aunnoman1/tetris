@@ -22,7 +22,7 @@ void lReverse::rotateShape(Well& well)
 	{
 		rotation = 1; cout << rotation;
 	}
-	else if (rotation == 1 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow+1, mainCol + 1) == true)
+	else if (rotation == 1 && mainCol > 0 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow+1, mainCol + 1) == true)
 	{
 		rotation = 2; cout << rotation;
 	}
@@ -30,7 +30,7 @@ void lReverse::rotateShape(Well& well)
 	{
 		rotation = 3; cout << rotation;
 	}
-	else if (rotation == 3 && well.cellCheck(mainRow - 1, mainCol-1) == true && well.cellCheck(mainRow , mainCol-1) == true && well.cellCheck(mainRow , mainCol + 1) == true)
+	else if (rotation == 3 && mainCol < 9 && well.cellCheck(mainRow - 1, mainCol-1) == true && well.cellCheck(mainRow , mainCol-1) == true && well.cellCheck(mainRow , mainCol + 1) == true)
 	{
 		rotation = 0; cout << rotation;
 	}

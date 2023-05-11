@@ -18,11 +18,11 @@ rectangle::rectangle()
 }
 void rectangle::rotateShape(Well& well)
 {
-	if (rotation == 0 && well.cellCheck(mainRow - 1, mainCol) == true && well.cellCheck(mainRow + 1, mainCol) == true && well.cellCheck(mainRow + 2, mainCol) == true)
+	if (rotation == 0  && well.cellCheck(mainRow - 1, mainCol) == true && well.cellCheck(mainRow + 1, mainCol) == true && well.cellCheck(mainRow + 2, mainCol) == true)
 	{
 		rotation = 1; cout << rotation;
 	}
-	else if (rotation == 1 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow, mainCol + 2) == true)
+	else if (rotation == 1 && mainCol<8 && mainCol>0 && well.cellCheck(mainRow, mainCol - 1) == true && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow, mainCol + 2) == true)
 	{
 		rotation = 0; cout << rotation;
 	}

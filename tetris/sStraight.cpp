@@ -22,18 +22,18 @@ void sStraight::rotateShape(Well& well)
 	{
 		rotation = 1; cout << rotation;
 	}
-	else if (rotation == 1 && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow + 1, mainCol ) == true && well.cellCheck(mainRow + 1, mainCol - 1) == true)
+	else if (rotation == 1 && mainCol < 9 && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow + 1, mainCol ) == true && well.cellCheck(mainRow + 1, mainCol - 1) == true)
 	{
 		rotation = 0; cout << rotation;
 	}
 }
 bool sStraight::isSettled(Well& well) //returns false if every block under it is empty
 {
-	if (rotation == 0 && mainRow < 19 && well.cellCheck(mainRow + 2, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true && well.cellCheck(mainRow + 1, mainCol + 1) == true)
+	if (rotation == 0 && mainRow < 18 && well.cellCheck(mainRow + 2, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true && well.cellCheck(mainRow + 1, mainCol + 1) == true)
 	{
 		return false;
 	}
-	if (rotation == 1 && mainRow < 17 && well.cellCheck(mainRow + 1, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true)
+	if (rotation == 1 && mainRow < 18 && well.cellCheck(mainRow + 1, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true)
 	{
 		return false;
 	}
@@ -42,13 +42,13 @@ bool sStraight::isSettled(Well& well) //returns false if every block under it is
 }
 void sStraight::drop(Well& well, sf::RectangleShape& shapedrawer, sf::RenderWindow& window) //false = shape is not settled, true= shape is settled
 {
-	if (rotation == 0 && mainRow < 19 && well.cellCheck(mainRow + 2, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true && well.cellCheck(mainRow + 1, mainCol + 1) == true)
+	if (rotation == 0 && mainRow < 18 && well.cellCheck(mainRow + 2, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true && well.cellCheck(mainRow + 1, mainCol + 1) == true)
 	{
 		mainRow++;
 		mainY = mainY + 40;
 		draw(shapedrawer, window);
 	}
-	if (rotation == 1 && mainRow < 17 && well.cellCheck(mainRow + 1, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true)
+	if (rotation == 1 && mainRow < 18 && well.cellCheck(mainRow + 1, mainCol - 1) == true && well.cellCheck(mainRow + 2, mainCol) == true)
 	{
 		mainRow++;
 		mainY = mainY + 40;
