@@ -8,7 +8,7 @@ lReverse::lReverse()
 	outerColour[0] = 0;
 	outerColour[1] = 0;
 	outerColour[2] = 102;
-	outerColour[3] = 1;
+	outerColour[3] = 255;
 	mainRow = 0;
 	mainCol = 4;
 	rotation = 0;
@@ -81,10 +81,6 @@ void lReverse::drop(Well& well, sf::RectangleShape& shapedrawer, sf::RenderWindo
 		mainRow++;
 		mainY = mainY + 40;
 		draw(shapedrawer, window);
-	}
-	if (rotation == 1 && mainRow < 17 && well.cellCheck(mainRow + 3, mainCol) == true)
-	{
-
 	}
 }
 void lReverse::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window)

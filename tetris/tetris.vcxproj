@@ -134,10 +134,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LReverse.cpp" />
+    <ClCompile Include="LStraight.cpp" />
     <ClCompile Include="rectangle.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="square.cpp" />
+    <ClCompile Include="sStraight.cpp" />
     <ClCompile Include="well.cpp" />
   </ItemGroup>
   <ItemGroup>
