@@ -3,16 +3,23 @@
 #include<random>
 int main()
 {
+    sf::Font font;
+    if (!font.loadFromFile("DragonHunter.otf"))
+    {
+        cout << "error";
+    }
     srand(time(0));
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "TETRIS");
     Game game;
-    sf::Time interval = sf::milliseconds(1000);
     sf::Time elapsed;
     sf::Clock clock;
     sf::RectangleShape wellBoundary(sf::Vector2f(400.f, 800.f));
     sf::RectangleShape wellfiller(sf::Vector2f(40.f, 40.f));
     sf::RectangleShape shapemaker(sf::Vector2f(40.f, 40.f));
+    sf::RectangleShape gameDrawer(sf::Vector2f(0.f, 0.f));
+    sf::Text text;
+    text.setFont(font);
     while (window.isOpen())
     {
 
@@ -45,13 +52,13 @@ int main()
         }
 
         window.clear();
-        game.drawGame(wellBoundary,window,wellfiller,shapemaker);
+        game.drawGame(wellBoundary,window,wellfiller,shapemaker, gameDrawer, text);
 
 
 
         game.fixShape();
 
-        if (elapsed >= interval)
+        if (elapsed >= game.getInterval())
         {
             game.dropShape(shapemaker,window);
             clock.restart();

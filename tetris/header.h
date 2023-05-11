@@ -55,15 +55,19 @@ class Game
 	Well well;
 	tetrimino** shapes;
 	int currentShape;
+	int score;
+	int level;
+	sf::Time interval;
 public:
 	Game();
-	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape);
+	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape, sf::RectangleShape&, sf::Text&);
 	void dropShape(sf::RectangleShape&, sf::RenderWindow&);
 	void moveRight(sf::RectangleShape&, sf::RenderWindow&);
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&);
 	void fixShape();
 	void checkCombo();
 	void rotateShape(sf::RectangleShape&, sf::RenderWindow&);
+	sf::Time getInterval();
 };
 
 

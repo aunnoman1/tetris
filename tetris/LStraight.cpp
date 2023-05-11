@@ -9,7 +9,7 @@ lStraight::lStraight()
 	outerColour[1] = 49;
 	outerColour[2] = 0;
 	outerColour[3] = 255;
-	mainRow = 0;
+	mainRow = 1;
 	mainCol = 4;
 	rotation = 0;
 	mainX = 500 + mainCol * 40;
@@ -135,7 +135,7 @@ void lStraight::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window)
 }
 void lStraight::resetLocation()
 {
-	mainRow = 0;
+	mainRow = 1;
 	mainCol = 4;
 	rotation = 0;
 	mainX = 500 + mainCol * 40;

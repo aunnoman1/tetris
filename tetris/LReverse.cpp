@@ -9,7 +9,7 @@ lReverse::lReverse()
 	outerColour[1] = 0;
 	outerColour[2] = 102;
 	outerColour[3] = 255;
-	mainRow = 0;
+	mainRow = 1;
 	mainCol = 4;
 	rotation = 0;
 	mainX = 500 + mainCol * 40;
@@ -135,7 +135,7 @@ void lReverse::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window)
 }
 void lReverse::resetLocation()
 {
-	mainRow = 0;
+	mainRow = 1;
 	mainCol = 4;
 	rotation = 0;
 	mainX = 500 + mainCol * 40;
