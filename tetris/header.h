@@ -17,7 +17,7 @@ protected:
 public:
 	virtual void rotateShape(Well&) = 0;
 	virtual void drop(Well&, sf::RectangleShape&, sf::RenderWindow&) = 0;
-	virtual void draw(sf::RectangleShape&, sf::RenderWindow&) = 0;
+	virtual void draw(sf::RectangleShape&, sf::RenderWindow& ) = 0;
 	virtual void resetLocation() = 0;
 	virtual void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well&) = 0;
 	virtual void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&) = 0;

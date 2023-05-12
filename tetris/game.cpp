@@ -38,13 +38,25 @@ void Game::drawScore(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, s
 	window.draw(text);
 }
 
-void drawNextShape(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
+void Game::drawNextShape(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
 {
 	gameDrawer.setSize(sf::Vector2f(600.f, 300.f));
 	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
 	gameDrawer.setPosition(sf::Vector2f(1200.f, 100.f));
+	window.draw(gameDrawer);
+	gameDrawer.setSize(sf::Vector2f(600.f, 2.f));
+	gameDrawer.setFillColor(sf::Color(255, 255, 255));
+	gameDrawer.setOutlineThickness(0);
+	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 180.f));
+	window.draw(gameDrawer);
+	text.setString("NEXT SHAPE");
+	text.setCharacterSize(65);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(sf::Vector2f(1280.f, 100.f));
+	window.draw(text);
 }
 
 void Game::dropShape(sf::RectangleShape& shapemaker,sf::RenderWindow& window)

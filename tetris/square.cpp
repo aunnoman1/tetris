@@ -50,6 +50,7 @@ void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window)
 	shapedrawer.setPosition(mainX + 40, mainY+40);
 	window.draw(shapedrawer);
 }
+
 void square::resetLocation()
 {
 	mainRow = 0;

@@ -83,6 +83,7 @@ void rectangle::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window)
 		window.draw(shapedrawer);
 	}
 }
+
 void rectangle::resetLocation()
 {
 	mainRow = 0;
