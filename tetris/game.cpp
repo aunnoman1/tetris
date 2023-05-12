@@ -10,6 +10,7 @@ Game::Game()
 	shapes[5] = new sStraight;
 	shapes[6] = new T;
 	currentShape = rand() % 7;
+	nextShape = rand() % 7;
 	score = 0;
 	level = 1;
 	interval= sf::milliseconds(1000);
@@ -18,19 +19,34 @@ void Game::drawGame(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, 
 {
 	well.drawWell(wellBoundary, window, wellFiller,shapes);
 	shapes[currentShape]->draw(shapemaker, window);
+	drawScore(window, gameDrawer, text);
+	drawNextShape(window, gameDrawer, text);
+}
+
+void Game::drawScore(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
+{
 	gameDrawer.setSize(sf::Vector2f(600.f, 80.f));
-	gameDrawer.setFillColor(sf::Color(0,0,0));
+	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
-	gameDrawer.setOutlineColor(sf::Color(255,255,255));
-	gameDrawer.setPosition(sf::Vector2f(1200.f, 300.f));
+	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 450.f));
 	window.draw(gameDrawer);
 	text.setString("Score : " + to_string(score));
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(sf::Vector2f(1215.f, 300.f));
+	text.setPosition(sf::Vector2f(1215.f, 450.f));
 	window.draw(text);
-
 }
+
+void drawNextShape(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
+{
+	gameDrawer.setSize(sf::Vector2f(600.f, 300.f));
+	gameDrawer.setFillColor(sf::Color(0, 0, 0));
+	gameDrawer.setOutlineThickness(2);
+	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 100.f));
+}
+
 void Game::dropShape(sf::RectangleShape& shapemaker,sf::RenderWindow& window)
 {
 	shapes[currentShape]->drop(well, shapemaker, window);
@@ -72,7 +88,8 @@ void Game::fixShape()
 		shapes[currentShape]->updateWell(well);
 		checkCombo();
 		shapes[currentShape]->resetLocation();
-		currentShape = rand() % 7;
+		currentShape = nextShape;
+		nextShape = rand() % 7;
 		system("CLS");
 		for (int i = 0; i < 20; i++)
 		{

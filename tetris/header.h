@@ -55,6 +55,7 @@ class Game
 	Well well;
 	tetrimino** shapes;
 	int currentShape;
+	int nextShape;
 	int score;
 	int level;
 	sf::Time interval;
@@ -68,6 +69,8 @@ public:
 	void checkCombo();
 	void rotateShape(sf::RectangleShape&, sf::RenderWindow&);
 	sf::Time getInterval();
+	void drawScore(sf::RenderWindow& , sf::RectangleShape& , sf::Text& );
+	void drawNextShape(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
 };
 
 
