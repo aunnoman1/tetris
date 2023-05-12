@@ -20,11 +20,11 @@ void sStraight::rotateShape(Well& well)
 {
 	if (rotation == 0 && well.cellCheck(mainRow +1 , mainCol) == true && well.cellCheck(mainRow , mainCol - 1) == true && well.cellCheck(mainRow - 1, mainCol - 1) == true)
 	{
-		rotation = 1; cout << rotation;
+		rotation = 1; 
 	}
 	else if (rotation == 1 && mainCol < 9 && well.cellCheck(mainRow, mainCol + 1) == true && well.cellCheck(mainRow + 1, mainCol ) == true && well.cellCheck(mainRow + 1, mainCol - 1) == true)
 	{
-		rotation = 0; cout << rotation;
+		rotation = 0; 
 	}
 }
 bool sStraight::isSettled(Well& well) //returns false if every block under it is empty
@@ -82,6 +82,21 @@ void sStraight::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window)
 		shapedrawer.setPosition(mainX, mainY + 40);
 		window.draw(shapedrawer);
 	}
+}
+void sStraight::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window , int x , int y)
+{
+	shapedrawer.setFillColor(sf::Color(colour[0], colour[1], colour[2], colour[3]));
+	shapedrawer.setOutlineColor(sf::Color(outerColour[0], outerColour[1], outerColour[2], outerColour[3]));
+	shapedrawer.setOutlineThickness(-3);
+	shapedrawer.setPosition(x, y);
+	window.draw(shapedrawer);
+	shapedrawer.setPosition(x - 40, y + 40);
+	window.draw(shapedrawer);
+	shapedrawer.setPosition(x, y + 40);
+	window.draw(shapedrawer);
+	shapedrawer.setPosition(x + 40, y);
+	window.draw(shapedrawer);
+
 }
 void sStraight::resetLocation()
 {

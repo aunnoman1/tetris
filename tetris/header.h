@@ -17,12 +17,13 @@ protected:
 public:
 	virtual void rotateShape(Well&) = 0;
 	virtual void drop(Well&, sf::RectangleShape&, sf::RenderWindow&) = 0;
-	virtual void draw(sf::RectangleShape&, sf::RenderWindow& ) = 0;
+	virtual void draw(sf::RectangleShape&, sf::RenderWindow&) = 0;
 	virtual void resetLocation() = 0;
 	virtual void moveRight(sf::RectangleShape&, sf::RenderWindow&, Well&) = 0;
 	virtual void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&) = 0;
 	virtual bool isSettled(Well&) = 0;
 	virtual void updateWell(Well&) = 0;
+	virtual void draw(sf::RectangleShape&, sf::RenderWindow& , int x , int y) = 0;
 	sf::Color getColour()
 	{
 		return sf::Color(colour[0], colour[1], colour[2], colour[3]);
@@ -59,6 +60,7 @@ class Game
 	int score;
 	int level;
 	sf::Time interval;
+	bool gameRunning;
 public:
 	Game();
 	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape, sf::RectangleShape&, sf::Text&);
@@ -69,8 +71,9 @@ public:
 	void checkCombo();
 	void rotateShape(sf::RectangleShape&, sf::RenderWindow&);
 	sf::Time getInterval();
-	void drawScore(sf::RenderWindow& , sf::RectangleShape& , sf::Text& );
-	void drawNextShape(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void drawScore(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void drawNextShape(sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape&, sf::Text&);
+	void drawLevel(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
 };
 
 
@@ -88,6 +91,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };
 
 class rectangle : public tetrimino
@@ -102,6 +106,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };
 
 class lReverse : public tetrimino
@@ -116,6 +121,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };
 
 class lStraight : public tetrimino
@@ -130,6 +136,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };
 
 class sStraight : public tetrimino
@@ -144,6 +151,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };
 
 class sReverse : public tetrimino
@@ -158,6 +166,7 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };
 
 class T : public tetrimino
@@ -172,4 +181,5 @@ public:
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&, Well&);
 	bool isSettled(Well&);
 	void updateWell(Well&);
+	void draw(sf::RectangleShape&, sf::RenderWindow&, int x, int y);
 };

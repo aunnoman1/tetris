@@ -20,7 +20,7 @@ void square::rotateShape(Well&)
 {}
 bool square::isSettled(Well& well)
 {
-	if (well.cellCheck(mainRow + 2,mainCol) == true && well.cellCheck(mainRow + 2,mainCol + 1) == true)
+	if (mainRow < 18 && well.cellCheck(mainRow + 2,mainCol) == true && well.cellCheck(mainRow + 2,mainCol + 1) == true)
 	{
 		return false;
 	}
@@ -36,7 +36,7 @@ void square::drop(Well& well, sf::RectangleShape &shapedrawer, sf::RenderWindow 
 		draw(shapedrawer, window);
 	}
 }
-void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window)
+void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window )
 {
 	shapedrawer.setFillColor(sf::Color(colour[0], colour[1], colour[2], colour[3]));
 	shapedrawer.setOutlineColor(sf::Color(outerColour[0], outerColour[1], outerColour[2], outerColour[3]));
@@ -48,6 +48,20 @@ void square::draw(sf::RectangleShape &shapedrawer,sf::RenderWindow &window)
 	shapedrawer.setPosition(mainX, mainY+40);
 	window.draw(shapedrawer);
 	shapedrawer.setPosition(mainX + 40, mainY+40);
+	window.draw(shapedrawer);
+}
+void square::draw(sf::RectangleShape& shapedrawer, sf::RenderWindow& window , int x , int y)
+{
+	shapedrawer.setFillColor(sf::Color(colour[0], colour[1], colour[2], colour[3]));
+	shapedrawer.setOutlineColor(sf::Color(outerColour[0], outerColour[1], outerColour[2], outerColour[3]));
+	shapedrawer.setOutlineThickness(-3);
+	shapedrawer.setPosition(x, y);
+	window.draw(shapedrawer);
+	shapedrawer.setPosition(x + 40, y);
+	window.draw(shapedrawer);
+	shapedrawer.setPosition(x, y + 40);
+	window.draw(shapedrawer);
+	shapedrawer.setPosition(x + 40, y + 40);
 	window.draw(shapedrawer);
 }
 
