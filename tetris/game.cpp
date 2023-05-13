@@ -15,6 +15,15 @@ Game::Game()
 	level = 1;
 	interval= sf::milliseconds(1000);
 	lines = 0;
+	names.open("names.txt");
+	scores.open("scores.txt");
+	newNames.open("tempnames.txt");
+	newScores.open("tempscores.txt");
+	name = "";
+}
+void Game::setname(string n)
+{
+	name = n;
 }
 void Game::drawGame(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, sf::RectangleShape& wellFiller,sf::RectangleShape shapemaker , sf::RectangleShape& gameDrawer, sf::Text& text)
 {
@@ -24,6 +33,7 @@ void Game::drawGame(sf::RectangleShape& wellBoundary, sf::RenderWindow& window, 
 	drawNextShape(window, gameDrawer, shapemaker, text);
 	drawLevel(window,gameDrawer,text);
 	drawNumLines(window, gameDrawer, text);
+	drawLeaderBoard(window, gameDrawer, text);
 }
 
 void Game::drawScore(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
@@ -32,12 +42,12 @@ void Game::drawScore(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, s
 	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
-	gameDrawer.setPosition(sf::Vector2f(1200.f, 400.f));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 320.f));
 	window.draw(gameDrawer);
 	text.setString("Score : " + to_string(score));
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(sf::Vector2f(1215.f, 400.f));
+	text.setPosition(sf::Vector2f(1215.f, 320.f));
 	window.draw(text);
 }
 
@@ -47,20 +57,20 @@ void Game::drawNextShape(sf::RenderWindow& window, sf::RectangleShape& gameDrawe
 	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
-	gameDrawer.setPosition(sf::Vector2f(1200.f, 100.f));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 50.f));
 	window.draw(gameDrawer);
 	gameDrawer.setSize(sf::Vector2f(600.f, 2.f));
 	gameDrawer.setFillColor(sf::Color(255, 255, 255));
 	gameDrawer.setOutlineThickness(0);
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
-	gameDrawer.setPosition(sf::Vector2f(1200.f, 180.f));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 130.f));
 	window.draw(gameDrawer);
 	text.setString("NEXT SHAPE");
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(sf::Vector2f(1280.f, 100.f));
+	text.setPosition(sf::Vector2f(1280.f, 50.f));
 	window.draw(text);
-	shapes[nextShape]->draw(shapemaker, window, 1455, 245);
+	shapes[nextShape]->draw(shapemaker, window, 1455, 195);
 }
 
 void Game::drawLevel(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
@@ -69,12 +79,12 @@ void Game::drawLevel(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, s
 	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
-	gameDrawer.setPosition(sf::Vector2f(1200.f, 500.f));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 420.f));
 	window.draw(gameDrawer);
 	text.setString("Level : " + to_string(level));
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(sf::Vector2f(1215.f, 500.f));
+	text.setPosition(sf::Vector2f(1215.f, 420.f));
 	window.draw(text);
 }
 
@@ -114,75 +124,179 @@ void Game::drawNumLines(sf::RenderWindow& window, sf::RectangleShape& gameDrawer
 	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255));
-	gameDrawer.setPosition(sf::Vector2f(1200.f, 600.f));
+	gameDrawer.setPosition(sf::Vector2f(1200.f, 520.f));
 	window.draw(gameDrawer);
 	text.setString("Lines : " + to_string(lines));
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(sf::Vector2f(1215.f, 600.f));
+	text.setPosition(sf::Vector2f(1215.f, 520.f));
 	window.draw(text);
 }
-
-void Game::drawGameOver(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
+void Game::drawLeaderBoard(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
 {
+	string temp;
 	gameDrawer.setFillColor(sf::Color(0, 0, 0, 0));
-	gameDrawer.setSize(sf::Vector2f(430.f, 400.f));
-	gameDrawer.setPosition(sf::Vector2f(745, 500.f));
+	gameDrawer.setSize(sf::Vector2f(600.f, 300.f));
+	gameDrawer.setPosition(sf::Vector2f(1200, 700.f));
 	gameDrawer.setOutlineColor(sf::Color(255, 255, 255, 255));
 	gameDrawer.setOutlineThickness(2);
 	window.draw(gameDrawer);
-	text.setString("Leaderboard");
+
+	gameDrawer.setSize(sf::Vector2f(600.f, 80.f));
+	gameDrawer.setPosition(sf::Vector2f(1200, 620.f));
+	window.draw(gameDrawer);
+
+	text.setString("leaderBoard");
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(sf::Vector2f(650.f, 400.f));
+	text.setPosition(sf::Vector2f(1250.f, 620.f));
 	window.draw(text);
-
+	int moveby = 0;
+	while (getline(names, temp))
+	{
+		text.setString(temp);
+		text.setCharacterSize(50);
+		text.setFillColor(sf::Color::White);
+		text.setPosition(sf::Vector2f(1210.f, (700+moveby)));
+		window.draw(text);
+		moveby += 60;
+	}
+	names.clear();
+	names.seekg(0);
+	moveby = 0;
+	while (getline(scores, temp))
+	{
+		text.setString(temp);
+		text.setCharacterSize(50);
+		text.setFillColor(sf::Color::White);
+		text.setPosition(sf::Vector2f(1600.f, (700 + moveby)));
+		window.draw(text);
+		moveby += 60;
+	}
+	scores.clear();
+	scores.seekg(0);
 }
 
-void Game::drawGameOverScreen(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text, ifstream& names , ifstream& scores)
+void Game::UpdateLeaderboard()
 {
-	gameDrawer.setSize(sf::Vector2f(420.f, 100.f));
+	string  oldscore,oldname ;
+	int i = 1  , sLine,nLine;
+	bool scoreAdded = false;
+	while (i<6)
+	{
+		sLine = scores.tellg();
+		nLine = names.tellg();
+		getline(scores, oldscore);
+		getline(names, oldname);
+		if (score > stoi(oldscore) && !scoreAdded)
+		{
+			newNames<<(to_string(i) +". " + name)<<endl;
+			newScores << to_string(score)<<endl;
+			scoreAdded = true;
+			scores.seekg(sLine);
+			names.seekg(nLine);
+		}
+		else
+		{
+			newNames << oldname<<endl;
+			newScores << oldscore<<endl;
+		}
+		i++;
+	}
+	scores.close();
+	names.close();
+	newScores.close();
+	newNames.close();
+	remove("scores.txt");
+	remove("names.txt");
+	rename("tempscores.txt", "scores.txt");
+	rename("tempnames.txt", "names.txt");
+	names.open("names.txt");
+	scores.open("scores.txt");
+	newNames.open("tempnames.txt");
+	newScores.open("tempscores.txt");
+}
+void Game::drawGameOver(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
+{
+	gameDrawer.setSize(sf::Vector2f(460.f, 100.f));
 	gameDrawer.setFillColor(sf::Color(0, 0, 0));
 	gameDrawer.setOutlineThickness(2);
 	gameDrawer.setOutlineColor(sf::Color(255, 0, 0));
-	gameDrawer.setPosition(sf::Vector2f(490.f, 420.f));
+	gameDrawer.setPosition(sf::Vector2f(470.f, 420.f));
 	window.draw(gameDrawer);
 	text.setString("Game over");
 	text.setCharacterSize(65);
 	text.setFillColor(sf::Color::White);
 	text.setPosition(sf::Vector2f(500.f, 430.f));
 	window.draw(text);
+
+
+}
+
+void Game::drawGameOverScreen(sf::RenderWindow& window, sf::RectangleShape& gameDrawer, sf::Text& text)
+{
+	string temp;
+	int moveby = 0;
+	gameDrawer.setSize(sf::Vector2f(700.f, 170.f));
+	gameDrawer.setFillColor(sf::Color::White);
+	gameDrawer.setOutlineThickness(2);
+	gameDrawer.setOutlineColor(sf::Color(255, 0, 0));
+	gameDrawer.setPosition(sf::Vector2f(610.f, 100.f));
+	window.draw(gameDrawer);
+	text.setString("Game over");
+	text.setCharacterSize(110);
+	text.setFillColor(sf::Color::Red);
+	text.setPosition(sf::Vector2f(640.f, 115.f));
+	window.draw(text);
+
+	gameDrawer.setFillColor(sf::Color(0, 0, 0, 0));
+	gameDrawer.setSize(sf::Vector2f(700.f, 400.f));
+	gameDrawer.setPosition(sf::Vector2f(610, 500.f));
+	gameDrawer.setOutlineColor(sf::Color(255, 255, 255, 255));
+	gameDrawer.setOutlineThickness(2);
+	window.draw(gameDrawer);
+	text.setString("leaderBoard");
+	text.setCharacterSize(65);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(sf::Vector2f(720.f, 400.f));
+	window.draw(text);
+
+	while (getline(names, temp))
+	{
+		text.setString(temp);
+		text.setCharacterSize(70);
+		text.setFillColor(sf::Color::White);
+		text.setPosition(sf::Vector2f(620.f, (500 + moveby)));
+		window.draw(text);
+		moveby += 75;
+	}
+	names.clear();
+	names.seekg(0);
+	moveby = 0;
+	while (getline(scores, temp))
+	{
+		text.setString(temp);
+		text.setCharacterSize(70);
+		text.setFillColor(sf::Color::White);
+		text.setPosition(sf::Vector2f(1065.f, (500 + moveby)));
+		window.draw(text);
+		moveby += 75;
+	}
+	scores.clear();
+	scores.seekg(0);
 }
 
 void Game::dropShape(sf::RectangleShape& shapemaker,sf::RenderWindow& window)
 {
 	shapes[currentShape]->drop(well, shapemaker, window);
-	//if (shapes[currentShape]->isSettled(well))
-	//{
-	//	fixShape();
-	//	shapes[currentShape]->resetLocation();
-	//	currentShape = rand() % 7;
-	//}
 }
 void Game::moveRight(sf::RectangleShape& shapeMaker, sf::RenderWindow& window)
 {
 	 shapes[currentShape]->moveRight(shapeMaker, window ,well);
-	 //if (shapes[currentShape]->isSettled(well))
-	 //{
-		// fixShape();
-		// shapes[currentShape]->resetLocation();
-		// currentShape = rand() % 7;
-	 //}
 }
 void Game::moveLeft(sf::RectangleShape& shapeMaker, sf::RenderWindow& window)
 {
 	shapes[currentShape]->moveLeft(shapeMaker, window, well);
-	//if (shapes[currentShape]->isSettled(well))
-	//{
-	//	fixShape();
-	//	shapes[currentShape]->resetLocation();
-	//	currentShape = rand() % 7;
-	//}
 }
 void Game::rotateShape(sf::RectangleShape& shapemaker, sf::RenderWindow& window)
 {

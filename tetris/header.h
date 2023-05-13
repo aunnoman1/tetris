@@ -1,5 +1,6 @@
 #include<iostream>
 #include <SFML/Graphics.hpp>
+#include<fstream>
 using namespace std;
 
 class Well;
@@ -57,10 +58,15 @@ class Game
 	tetrimino** shapes;
 	int currentShape;
 	int nextShape;
+	string name;
 	int score;
 	int level;
 	int lines;
 	sf::Time interval;
+	ofstream newScores;
+	ofstream newNames;
+	ifstream scores;
+	ifstream names;
 public:
 	Game();
 	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape, sf::RectangleShape&, sf::Text&);
@@ -78,7 +84,10 @@ public:
 	bool gameRunning();
 	void drawNumLines(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
 	void drawGameOver(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
-	void drawGameOverScreen(sf::RenderWindow&, sf::RectangleShape&, sf::Text&, ifstream&, ifstream&);
+	void drawLeaderBoard(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void drawGameOverScreen(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void UpdateLeaderboard();
+	void setname(string);
 };
 
 

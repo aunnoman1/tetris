@@ -11,14 +11,7 @@ int main()
         cout << "error";
     }
     bool filesExist;
-    ofstream newScores("newScores.txt");
-    ofstream newNames("newnames.txt");
-    ifstream scores("scores.txt");
-    ifstream names("names.txt");
-    if (scores)
-        filesExist = true;
-    else
-        filesExist = false;
+
 
     srand(time(0));
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
@@ -66,7 +59,8 @@ int main()
             window.display();
         }
     }
-    while (window.isOpen() &&game.gameRunning())
+    game.setname(name);
+    while (window.isOpen() && game.gameRunning())
     {
         elapsed = clock.getElapsedTime();
  
@@ -96,7 +90,7 @@ int main()
                 }
             }
         }
-        game.drawGame(wellBoundary,window,wellfiller,shapemaker, gameDrawer, text);
+        game.drawGame(wellBoundary,window,wellfiller,shapemaker, gameDrawer, text );
 
         if (elapsed >= game.getInterval() && game.gameRunning() == true)
         {
@@ -112,7 +106,7 @@ int main()
         if (game.gameRunning() == false)
             Sleep(2000);
     }
-
+    game.UpdateLeaderboard();
     while (window.isOpen())
     {
         sf::Event event;
@@ -122,7 +116,8 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        game.drawGameOverScreen(window, gameDrawer, text, names, scores);
+
+        game.drawGameOverScreen(window, gameDrawer, text);
 
         window.display();
 
