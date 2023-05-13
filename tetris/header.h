@@ -88,6 +88,7 @@ public:
 	void drawGameOverScreen(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
 	void UpdateLeaderboard();
 	void setname(string);
+	~Game();
 };
 
 

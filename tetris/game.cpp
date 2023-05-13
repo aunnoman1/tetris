@@ -21,6 +21,14 @@ Game::Game()
 	newScores.open("tempscores.txt");
 	name = "";
 }
+Game::~Game()
+{
+	for (int i = 0; i < 7; i++)
+	{
+		delete shapes[i];
+		shapes[i] = NULL;
+	}
+}
 void Game::setname(string n)
 {
 	name = n;
