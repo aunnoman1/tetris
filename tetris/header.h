@@ -59,21 +59,26 @@ class Game
 	int nextShape;
 	int score;
 	int level;
+	int lines;
 	sf::Time interval;
-	bool gameRunning;
 public:
 	Game();
 	void drawGame(sf::RectangleShape&, sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape, sf::RectangleShape&, sf::Text&);
 	void dropShape(sf::RectangleShape&, sf::RenderWindow&);
 	void moveRight(sf::RectangleShape&, sf::RenderWindow&);
 	void moveLeft(sf::RectangleShape&, sf::RenderWindow&);
-	void fixShape();
+	bool fixShape();
 	void checkCombo();
 	void rotateShape(sf::RectangleShape&, sf::RenderWindow&);
 	sf::Time getInterval();
 	void drawScore(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
 	void drawNextShape(sf::RenderWindow&, sf::RectangleShape&, sf::RectangleShape&, sf::Text&);
 	void drawLevel(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void drawUser(sf::RenderWindow&, sf::RectangleShape&, sf::Text&, string&);
+	bool gameRunning();
+	void drawNumLines(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void drawGameOver(sf::RenderWindow&, sf::RectangleShape&, sf::Text&);
+	void drawGameOverScreen(sf::RenderWindow&, sf::RectangleShape&, sf::Text&, ifstream&, ifstream&);
 };
 
 

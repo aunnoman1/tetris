@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include"header.h"
 #include<random>
-#include<Windows.h>
+#include<fstream>
+#include<windows.h>
 int main()
 {
     sf::Font font;
@@ -9,6 +10,16 @@ int main()
     {
         cout << "error";
     }
+    bool filesExist;
+    ofstream newScores("newScores.txt");
+    ofstream newNames("newnames.txt");
+    ifstream scores("scores.txt");
+    ifstream names("names.txt");
+    if (scores)
+        filesExist = true;
+    else
+        filesExist = false;
+
     srand(time(0));
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(desktop, "TETRIS");
@@ -40,22 +51,7 @@ int main()
 
             }
             window.clear();
-            gameDrawer.setFillColor(sf::Color(0, 0, 0, 0));
-            gameDrawer.setSize(sf::Vector2f(430.f, 80.f));
-            gameDrawer.setPosition(sf::Vector2f(745, 500.f));
-            gameDrawer.setOutlineColor(sf::Color(255, 255, 255, 255));
-            gameDrawer.setOutlineThickness(2);
-            window.draw(gameDrawer);
-            text.setString("Enter Your Name");
-            text.setCharacterSize(65);
-            text.setFillColor(sf::Color::White);
-            text.setPosition(sf::Vector2f(650.f, 400.f));
-            window.draw(text);
-
-            text.setString(name);
-            text.setCharacterSize(65);
-            text.setFillColor(sf::Color::White);
-            text.setPosition(sf::Vector2f(780.f, 500.f));
+            game.drawUser(window, gameDrawer, text, name);
             window.draw(text);
 
             
@@ -70,11 +66,12 @@ int main()
             window.display();
         }
     }
-    while (window.isOpen())
+    while (window.isOpen() &&game.gameRunning())
     {
         elapsed = clock.getElapsedTime();
  
         sf::Event event;
+        window.clear();
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
@@ -85,33 +82,48 @@ int main()
                 {
                     game.moveRight(shapemaker, window);
                 }
-                if (event.key.code == sf::Keyboard::Down)
+                 else if (event.key.code == sf::Keyboard::Down)
                 {
                     game.dropShape(shapemaker, window);
                 }
-                if (event.key.code == sf::Keyboard::Left)
+                 else if (event.key.code == sf::Keyboard::Left)
                 {
                     game.moveLeft(shapemaker, window);
                 }
-                if (event.key.code == sf::Keyboard::Up)
+                 else if (event.key.code == sf::Keyboard::Up)
                 {
                     game.rotateShape(shapemaker, window);
                 }
             }
         }
-
-        window.clear();
         game.drawGame(wellBoundary,window,wellfiller,shapemaker, gameDrawer, text);
 
-
-
-        game.fixShape();
-
-        if (elapsed >= game.getInterval())
+        if (elapsed >= game.getInterval() && game.gameRunning() == true)
         {
-            game.dropShape(shapemaker,window);
+            if(!game.fixShape())
+                game.dropShape(shapemaker,window);
             clock.restart();
         }
+        if (game.gameRunning() == false)
+        {
+            game.drawGameOver(window, gameDrawer, text);
+        }
+        window.display();
+        if (game.gameRunning() == false)
+            Sleep(2000);
+    }
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        window.clear();
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        game.drawGameOverScreen(window, gameDrawer, text, names, scores);
+
         window.display();
 
     }
